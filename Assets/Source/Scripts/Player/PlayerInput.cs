@@ -1,11 +1,18 @@
 using UnityEngine;
 
-public class PlayerInput : MonoBehaviour {
-
-	[SerializeField] private PlayerMovement _movement;
+[RequireComponent(typeof(CharacterController))]
+public class PlayerInput : MonoBehaviour 
+{
 	[SerializeField] private float _speed = 40f;
-	
-	private void Update ()
+
+	private CharacterMovement _movement;
+    
+    private void Start()
+    {
+        _movement= GetComponent<CharacterMovement>();
+    }
+
+    private void Update ()
 	{
 		float horizontal = Input.GetAxisRaw(Axis.Horizontal);
 		float vertical = Input.GetAxisRaw(Axis.Vertical);

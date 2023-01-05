@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerMovement : MonoBehaviour
+public class CharacterMovement : MonoBehaviour
 {
 	[SerializeField] private float _jumpForce = 400f;
 	[Range(0, .3f)] [SerializeField] private float _moveSmoothTime = .05f;
@@ -17,15 +17,12 @@ public class PlayerMovement : MonoBehaviour
 
 	public void Move(float move)
 	{
-		if (_grounded)
-		{
-			Vector2 targetVelocity = new Vector2(move, _selfRigidbody2D.velocity.y);
-			_selfRigidbody2D.velocity = Vector2.SmoothDamp(_selfRigidbody2D.velocity,
-														   targetVelocity,
-														   ref _velocity,
-														   _moveSmoothTime);
-		}
-	}
+        Vector2 targetVelocity = new Vector2(move, _selfRigidbody2D.velocity.y);
+        _selfRigidbody2D.velocity = Vector2.SmoothDamp(_selfRigidbody2D.velocity,
+                                                       targetVelocity,
+                                                       ref _velocity,
+                                                       _moveSmoothTime);
+    }
 
 	public void Slide()
 	{
