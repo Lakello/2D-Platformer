@@ -1,18 +1,22 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
 public class CharacterMovement : MonoBehaviour
 {
 	[SerializeField] private float _jumpForce = 400f;
 	[Range(0, .3f)] [SerializeField] private float _moveSmoothTime = .05f;
 
-	private bool _grounded = true;
+	private GroundChecker _groundChecker = new();
 	private Rigidbody2D _selfRigidbody2D;
+	private Collider2D _selfCollider2D;
 	private Vector2 _velocity = Vector2.zero;
 
+	private bool IsGrounded => _groundChecker.Check(_selfCollider2D);
+	
 	private void Start()
 	{
 		_selfRigidbody2D = GetComponent<Rigidbody2D>();
+		_selfCollider2D = GetComponent<Collider2D>();
 	}
 
 	public void Move(float move)
@@ -31,9 +35,8 @@ public class CharacterMovement : MonoBehaviour
 
 	public void Jump()
 	{
-        if (_grounded)
+        if (IsGrounded)
         {
-            _grounded = false;
             _selfRigidbody2D.AddForce(new Vector2(0f, _jumpForce), ForceMode2D.Force);
         }
     }
