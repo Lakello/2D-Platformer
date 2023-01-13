@@ -566,7 +566,7 @@ Animator:
   m_GameObject: {fileID: 455028493}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: acef2fed9bfde5348bda875dccc703d9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -655,7 +655,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a56b4bcdd2179c46a0458e64b0cf1ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _jumpForce: 400
+  _jumpForce: 5
+  _movementSpeed: 50
   _moveSmoothTime: 0.05
 --- !u!114 &455028503
 MonoBehaviour:
@@ -669,7 +670,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e74ea91608800bb439c23da873a4f629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 40
 --- !u!1 &477649211
 GameObject:
   m_ObjectHideFlags: 0

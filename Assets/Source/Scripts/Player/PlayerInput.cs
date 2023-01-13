@@ -1,16 +1,12 @@
+using System;
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController))]
 public class PlayerInput : MonoBehaviour 
 {
-	[SerializeField] private float _speed = 40f;
-
-	private CharacterMovement _movement;
-    
-    private void Start()
-    {
-        _movement= GetComponent<CharacterMovement>();
-    }
+	public event Action<float> Moveing;
+    public event Action Jumping;
+    public event Action Slideing;
+    public event Action Shooting;
 
     private void Update ()
 	{
@@ -18,11 +14,11 @@ public class PlayerInput : MonoBehaviour
 		float vertical = Input.GetAxisRaw(Axis.Vertical);
 
         if (vertical > 0)
-			_movement.Jump();
+			Jumping?.Invoke();
 
 		if (vertical < 0)
-			_movement.Slide();
+			Slideing?.Invoke();
 
-        _movement.Move(horizontal * _speed * Time.fixedDeltaTime);
+		Moveing?.DynamicInvoke(horizontal);
     }
 }
