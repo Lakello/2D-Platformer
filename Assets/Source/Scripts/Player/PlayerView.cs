@@ -1,31 +1,12 @@
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerPossitilities), typeof(Animator), typeof(SpriteRenderer))]
+[RequireComponent(typeof(Animator), typeof(SpriteRenderer))]
 public class PlayerView : MonoBehaviour
 {
-    [SerializeField] private Player _player;
-
     private Animator _selfAnimator;
     private SpriteRenderer _selfSpriteRenderer;
     private bool _isRun;
     private bool _leftDirection;
-
-    private void OnValidate()
-    {
-        if (_player == null)
-        {
-            Debug.LogError($"{nameof(PlayerView)} => Component <<{nameof(Player)}>> = null");
-        }
-    }
-
-    private void OnEnable()
-    {
-        _player.Grounding += OnGrounding;
-        _player.Moveing += OnMoveing;
-        _player.Jumping += OnJumping;
-        _player.Falling += OnFalling;
-        _player.Shooting += OnShooting;
-    }
 
     private void Start()
     {
@@ -33,21 +14,12 @@ public class PlayerView : MonoBehaviour
         _selfSpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void OnDisable()
-    {
-        _player.Grounding -= OnGrounding;
-        _player.Moveing -= OnMoveing;
-        _player.Jumping -= OnJumping;
-        _player.Falling -= OnFalling;
-        _player.Shooting -= OnShooting;
-    }
-
-    private void OnGrounding(bool value)
+    public void OnGrounding(bool value)
     {
         SetAnimatorParameter(PlayerAnimatorController.Parameters.IsGrounded, value);
     }
 
-    private void OnMoveing(float horizontalInput)
+    public void OnMoveing(float horizontalInput)
     {
         SetDirection(horizontalInput);
         TryFlipView();
@@ -64,7 +36,7 @@ public class PlayerView : MonoBehaviour
         SetAnimatorParameter(PlayerAnimatorController.Parameters.IsRun, _isRun);
     }
 
-    private void SetDirection(float horizontalInput)
+    public void SetDirection(float horizontalInput)
     {
         if (horizontalInput > 0)
         {
@@ -76,7 +48,7 @@ public class PlayerView : MonoBehaviour
         }
     }
 
-    private void TryFlipView()
+    public void TryFlipView()
     {
         if (_isRun)
         {
@@ -84,30 +56,30 @@ public class PlayerView : MonoBehaviour
         }
     }
 
-    private void OnJumping()
+    public void OnJumping()
     {
         SetAnimatorParameter(PlayerAnimatorController.Parameters.IsJump);
 
     }
 
-    private void OnFalling()
+    public void OnFalling()
     {
         SetAnimatorParameter(PlayerAnimatorController.Parameters.IsFall);
 
     }
 
-    private void OnShooting()
+    public void OnShooting()
     {
         SetAnimatorParameter(PlayerAnimatorController.Parameters.IsShoot);
 
     }
 
-    private void SetAnimatorParameter(string parameterName)
+    public void SetAnimatorParameter(string parameterName)
     {
         _selfAnimator.SetTrigger(parameterName);
     }
 
-    private void SetAnimatorParameter(string parameterName, bool value)
+    public void SetAnimatorParameter(string parameterName, bool value)
     {
         _selfAnimator.SetBool(parameterName, value);
     }

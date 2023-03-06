@@ -510,9 +510,11 @@ GameObject:
   - component: {fileID: 455028499}
   - component: {fileID: 455028498}
   - component: {fileID: 455028497}
-  - component: {fileID: 455028503}
-  - component: {fileID: 455028504}
+  - component: {fileID: 455028506}
   - component: {fileID: 455028505}
+  - component: {fileID: 455028504}
+  - component: {fileID: 455028503}
+  - component: {fileID: 455028502}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -644,6 +646,44 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &455028502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 455028493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c3019863ac36da43bff43e427466e79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _jumpingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _height: 1.92
+  _maxJumpDelta: 0.2
 --- !u!114 &455028503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -653,25 +693,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 455028493}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e74ea91608800bb439c23da873a4f629, type: 3}
+  m_Script: {fileID: 11500000, guid: 4fa3c00374ae8e74f9afc22cdd93c9d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _movementSpeed: 5.5
 --- !u!114 &455028504
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 455028493}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ef1b5f7e9075424eb6c511e01365228, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _jumpForce: 10
-  _movementSpeed: 50
-  _moveSmoothTime: 0.05
---- !u!114 &455028505
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -683,7 +709,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8881282f7a7e10469f81deaa5be2b78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 455028504}
+--- !u!114 &455028505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 455028493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e74ea91608800bb439c23da873a4f629, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &455028506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 455028493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52d13121f4c6ed144b1ca4ecbbb68a2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &477649211
 GameObject:
   m_ObjectHideFlags: 0

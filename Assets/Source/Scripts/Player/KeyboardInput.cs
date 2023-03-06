@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerInput : MonoBehaviour 
+public class KeyboardInput : MonoBehaviour 
 {
 	public float Horizontal 
 	{ 
