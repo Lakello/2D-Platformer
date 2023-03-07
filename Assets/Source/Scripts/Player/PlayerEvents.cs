@@ -20,11 +20,11 @@ public class PlayerEvents : MonoBehaviour
 
     private bool IsGrounded => _groundChecker.Check(_selfCollider2D);
 
-    public event Action<float> Moveing;
-    public event Action<bool> Grounding;
-    public event Action Jumping;
-    public event Action Falling;
-    public event Action Shooting;
+    private event Action<float> Moveing;
+    private event Action<bool> Grounding;
+    private event Action Jumping;
+    private event Action Falling;
+    private event Action Shooting;
 
     private void OnEnable()
     {
@@ -95,10 +95,7 @@ public class PlayerEvents : MonoBehaviour
 
     private void TryCallMoveing()
     {
-        if ((_keyboardInput.Horizontal == 0) == false)
-        {
-            Moveing?.DynamicInvoke(_keyboardInput.Horizontal);
-        }
+        Moveing?.DynamicInvoke(_keyboardInput.Horizontal);
     }
 
     private void TryCallJumping()

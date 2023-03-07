@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerJumping : MonoBehaviour
+public class PlayerJumping : PhysicsDisplacement
 {
     private const float MaxProgress = 1;
 
@@ -12,12 +12,6 @@ public class PlayerJumping : MonoBehaviour
 
     private float _currentProgress;
     private Coroutine _jump;
-    private Rigidbody2D _selfRigidbody2D;
-
-    private void Start()
-    {
-        _selfRigidbody2D = GetComponent<Rigidbody2D>();
-    }
 
     public void OnJumping()
     {
@@ -31,7 +25,7 @@ public class PlayerJumping : MonoBehaviour
     private IEnumerator Jump()
     {
         _currentProgress = 0;
-        float yPosition;
+        float targetPositionY;
 
         while(_currentProgress < MaxProgress)
         {
@@ -39,12 +33,9 @@ public class PlayerJumping : MonoBehaviour
                                                 MaxProgress,
                                                 _maxJumpDelta);
                  
-            yPosition = _height * _jumpingCurve.Evaluate(_currentProgress);
+            targetPositionY = _height * _jumpingCurve.Evaluate(_currentProgress);
 
-            Vector2 targetPosition = new Vector2(_selfRigidbody2D.position.x,
-                                                yPosition + _selfRigidbody2D.position.y);
-
-            _selfRigidbody2D.MovePosition(targetPosition);
+            OffsetTargetPosition.y = targetPositionY;
 
             yield return null;
         }
