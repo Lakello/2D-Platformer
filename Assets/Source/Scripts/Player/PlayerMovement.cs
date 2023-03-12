@@ -1,14 +1,30 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
-public class PlayerMovement : PhysicsDisplacement
+public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField, Range(0.5f, 15f)] private float _movementSpeed = 10f;
+    [SerializeField, Range(50, 500)] private float _force = 365;
+    [SerializeField, Range(0.5f, 15f)] private float _maxSpeed = 5f;
+
+    private Rigidbody2D _selfRigidbody;
+
+    private void Start()
+    {
+        _selfRigidbody = GetComponent<Rigidbody2D>();
+    }
 
     public void OnMoveing(float horizontalInput)
     {
-        float targetPositionX = (horizontalInput * _movementSpeed * Time.deltaTime);
+        float absVelocity = Mathf.Abs(_selfRigidbody.velocity.x);
 
-        OffsetTargetPosition.x = targetPositionX;
+        if (absVelocity < _maxSpeed)
+        {
+            _selfRigidbody.AddForce(Vector2.right * horizontalInput * _force);
+        }
+
+        if (absVelocity > _maxSpeed)
+        {
+            _selfRigidbody.velocity = new Vector2(Mathf.Sign(_selfRigidbody.velocity.x) * _maxSpeed,
+                                                    _selfRigidbody.velocity.y);
+        }
     }
 }
