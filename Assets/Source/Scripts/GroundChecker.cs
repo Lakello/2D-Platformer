@@ -19,7 +19,7 @@ public class GroundChecker
     {
         foreach (var collider in colliders)
         {
-            if (collider.TryGetComponent(out Level level))
+            if (collider.TryGetComponent(out Ground level))
             {
                 return true;
             }

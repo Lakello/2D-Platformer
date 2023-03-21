@@ -1,19 +1,23 @@
 using UnityEngine;
+using UnityEngine.Events;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : Player
 {
-    [SerializeField, Range(1, 500)] private float _force = 365;
+    [SerializeField, Range(1, 500)] private float _moveSpeed = 365;
 
-    private Rigidbody2D _selfRigidbody;
+    public event UnityAction OnMoveing;
 
-    private void Start()
+    private void FixedUpdate()
     {
-        _selfRigidbody = GetComponent<Rigidbody2D>();
+        Move(KeyboardInput.Horizontal);
     }
 
-    public void OnMoveing(float horizontalInput)
+    private void Move(float horizontalInput)
     {
-        _selfRigidbody.velocity = new Vector2(horizontalInput * _force * Time.deltaTime,
-                                                _selfRigidbody.velocity.y);
+        OnMoveing?.Invoke();
+
+        float newVelocity = horizontalInput * _moveSpeed * Time.deltaTime;
+
+        SelfRigidbody2D.velocity = new Vector2(newVelocity, SelfRigidbody2D.velocity.y);
     }
 }

@@ -14,9 +14,9 @@ public class PlayerView : MonoBehaviour
         _selfSpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public void OnGrounding(bool value)
+    public void OnLanding()
     {
-        SetAnimatorParameter(PlayerAnimatorController.Parameters.IsGrounded, value);
+        SetAnimatorParameter(PlayerAnimatorController.Parameters.IsLanding);
     }
 
     public void OnMoveing(float horizontalInput)
@@ -34,6 +34,24 @@ public class PlayerView : MonoBehaviour
         }
 
         SetAnimatorParameter(PlayerAnimatorController.Parameters.IsRun, _isRun);
+    }
+
+    public void OnJumping()
+    {
+        SetAnimatorParameter(PlayerAnimatorController.Parameters.IsJump);
+
+    }
+
+    public void OnFalling()
+    {
+        SetAnimatorParameter(PlayerAnimatorController.Parameters.IsFall);
+
+    }
+
+    public void OnShooting()
+    {
+        SetAnimatorParameter(PlayerAnimatorController.Parameters.IsShoot);
+
     }
 
     public void SetDirection(float horizontalInput)
@@ -54,24 +72,6 @@ public class PlayerView : MonoBehaviour
         {
             _selfSpriteRenderer.flipX = _leftDirection;
         }
-    }
-
-    public void OnJumping()
-    {
-        SetAnimatorParameter(PlayerAnimatorController.Parameters.IsJump);
-
-    }
-
-    public void OnFalling()
-    {
-        SetAnimatorParameter(PlayerAnimatorController.Parameters.IsFall);
-
-    }
-
-    public void OnShooting()
-    {
-        SetAnimatorParameter(PlayerAnimatorController.Parameters.IsShoot);
-
     }
 
     public void SetAnimatorParameter(string parameterName)
