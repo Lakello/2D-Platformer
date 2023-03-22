@@ -1,11 +1,14 @@
 using UnityEngine;
-using System;
 using UnityEngine.Events;
-using System.Collections;
 
+[RequireComponent(typeof(JumpFX))]
 public class PlayerJumping : Player
 {
-    [SerializeField, Range(1f, 10f)] private float _jumpVelocity = 3f;
+    [SerializeField] private float _length;
+    [SerializeField] private float _duration;
+
+    private JumpFX _fx;
+    private PureAnimation _playTime;
 
     private event UnityAction _landing;
     private event UnityAction _jumping;
@@ -18,6 +21,13 @@ public class PlayerJumping : Player
         _landing += PlayerView.OnLanding;
         _falling += PlayerView.OnFalling;
     }
+
+    private void Awake()
+    {
+        _fx = GetComponent<JumpFX>();
+        _playTime = new PureAnimation(this);
+    }
+
     private void OnDisable()
     {
         _jumping -= PlayerView.OnJumping;
@@ -29,23 +39,22 @@ public class PlayerJumping : Player
     {
         if (KeyboardInput.Vertical > 0 && IsGrounded)
         {
-            StopAllCoroutines();
-            StartCoroutine(Jump());
+            Jump(Vector3.up);
         }
     }
 
-    private IEnumerator Jump()
+    private void Jump(Vector3 direction)
     {
-        _jumping?.Invoke();
+        Vector3 target = transform.position + (direction * _length);
+        Vector3 startPosition = transform.position;
+        PureAnimation fxPlayTime = _fx.PlayAnimations(transform, _duration);
 
-        SelfRigidbody2D.velocity = new Vector2(SelfRigidbody2D.velocity.x, _jumpVelocity);
-        yield return IsGrounded == false;
-        yield return SelfRigidbody2D.velocity.y > 0;
+        _playTime.Play(_duration, (progress) =>
+        {
+            transform.position = Vector3.Lerp(startPosition, target, progress) +
+                                              fxPlayTime.LastChanges.Position;
 
-        _falling?.Invoke();
-
-        yield return IsGrounded == true;
-
-        _landing?.Invoke();
+            return null;
+        });
     }
 }
