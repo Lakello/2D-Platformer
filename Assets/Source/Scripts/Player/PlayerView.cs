@@ -1,6 +1,7 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Animator), typeof(SpriteRenderer))]
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class PlayerView : MonoBehaviour
 {
     private Animator _selfAnimator;
@@ -12,11 +13,6 @@ public class PlayerView : MonoBehaviour
     {
         _selfAnimator = GetComponent<Animator>();
         _selfSpriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
-    public void OnLanding()
-    {
-        SetAnimatorParameter(PlayerAnimatorController.Parameters.IsLanding);
     }
 
     public void OnMoveing(float horizontalInput)
@@ -34,24 +30,6 @@ public class PlayerView : MonoBehaviour
         }
 
         SetAnimatorParameter(PlayerAnimatorController.Parameters.IsRun, _isRun);
-    }
-
-    public void OnJumping()
-    {
-        SetAnimatorParameter(PlayerAnimatorController.Parameters.IsJump);
-
-    }
-
-    public void OnFalling()
-    {
-        SetAnimatorParameter(PlayerAnimatorController.Parameters.IsFall);
-
-    }
-
-    public void OnShooting()
-    {
-        SetAnimatorParameter(PlayerAnimatorController.Parameters.IsShoot);
-
     }
 
     public void SetDirection(float horizontalInput)
@@ -72,11 +50,6 @@ public class PlayerView : MonoBehaviour
         {
             _selfSpriteRenderer.flipX = _leftDirection;
         }
-    }
-
-    public void SetAnimatorParameter(string parameterName)
-    {
-        _selfAnimator.SetTrigger(parameterName);
     }
 
     public void SetAnimatorParameter(string parameterName, bool value)

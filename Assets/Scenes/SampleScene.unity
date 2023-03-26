@@ -302,8 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c3019863ac36da43bff43e427466e79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _length: 3
-  _duration: 1
+  _jumpVelocity: 8
 --- !u!114 &455028503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,10 +365,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _yAnimation:
-    serializedVersion: 2
     m_Curve:
-    - serializedVersion: 3
-      time: 0
+    - time: 0
       value: 0
       inSlope: 2
       outSlope: 2
@@ -377,8 +374,7 @@ MonoBehaviour:
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.5
+    - time: 0.5
       value: 1
       inSlope: 0
       outSlope: 0
@@ -386,8 +382,7 @@ MonoBehaviour:
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
+    - time: 1
       value: 0
       inSlope: -2
       outSlope: -2
@@ -476,7 +471,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -29.65178, y: 5.4838195, z: -10}
+  m_LocalPosition: {x: -8.1, y: 20.66, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

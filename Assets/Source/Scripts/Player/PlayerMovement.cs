@@ -5,16 +5,26 @@ public class PlayerMovement : Player
 {
     [SerializeField, Range(1, 500)] private float _moveSpeed = 365;
 
-    public event UnityAction OnMoveing;
+    private event UnityAction<float> _moveing;
 
     private void FixedUpdate()
     {
         Move(KeyboardInput.Horizontal);
     }
 
+    protected override void Subscribe()
+    {
+        _moveing += PlayerView.OnMoveing;
+    }
+
+    protected override void Unsubscribe()
+    {
+        _moveing -= PlayerView.OnMoveing;
+    }
+
     private void Move(float horizontalInput)
     {
-        OnMoveing?.Invoke();
+        _moveing?.Invoke(horizontalInput);
 
         float newVelocity = horizontalInput * _moveSpeed * Time.deltaTime;
 

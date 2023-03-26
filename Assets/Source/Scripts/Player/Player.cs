@@ -15,6 +15,17 @@ public class Player : MonoBehaviour
 
     protected bool IsGrounded => _groundChecker.Check(_selfCollider2D);
 
+    private void OnEnable()
+    {
+        TryInitializedViewComponent();
+        Subscribe();
+    }
+
+    private void OnDisable()
+    {
+        Unsubscribe();
+    }
+
     private void Start()
     {
         SelfRigidbody2D = GetComponent<Rigidbody2D>();
@@ -29,4 +40,8 @@ public class Player : MonoBehaviour
             PlayerView = GetComponent<PlayerView>();
         }
     }
+
+    protected virtual void Subscribe() { }
+
+    protected virtual void Unsubscribe() { }
 }
