@@ -1,20 +1,8 @@
 using UnityEngine;
-using UnityEngine.Events;
 
-public class KeyboardInput : MonoBehaviour 
+public class KeyboardInput : MonoBehaviour, IInputeble
 {
-	public float Horizontal
-	{
-		get
-		{
-			return Input.GetAxisRaw(Axis.Horizontal);
-		}
-	}
-	public float Vertical
-	{
-		get
-		{
-			return Input.GetAxisRaw(Axis.Vertical);
-		}
-	}
+    public float Horizontal => Input.GetAxisRaw(Axis.Horizontal);
+
+    public float Vertical => Input.GetAxisRaw(Axis.Vertical);
 }
